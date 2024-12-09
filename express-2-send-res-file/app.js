@@ -9,7 +9,7 @@ app.get("/contacts", (req, res) => {
   // res.send(contacts); // automatically convert to JSON-string
 
   const responseDatabase = null;
-  // res.send(responseDatabase); // The DB will send null, but you nothing will get in response, because .send() can't handle "null"
+  // res.send(responseDatabase); // The DB will send null, but you nothing will get in response, because .send() can't process "null"
   res.json(responseDatabase); // You will get "null" from DB in response.
 
   // res.json(contacts);
