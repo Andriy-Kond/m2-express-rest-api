@@ -5,5 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>cors test</title>
   </head>
-  <body></body>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const request = axios.get("http://localhost:3003/contacts");
+      request
+        .then(({ data }) => console.log("data :>> ", data))
+        .catch(err => err.message);
+    </script>
+  </body>
 </html>

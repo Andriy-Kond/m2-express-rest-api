@@ -2,11 +2,12 @@ import express from "express";
 import { contacts } from "./db/contacts.js";
 import { DateTime } from "luxon";
 import fs from "fs/promises";
+import cors from "cors";
 
 const app = express();
 const port = 3003;
 
-//  # add middleware
+//  * add middleware
 // app.use("", () => {}); - standard form
 
 // If .use() without first argument, it will execute for any request:
@@ -22,9 +23,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// Middleware for logging:
+// # Middleware for logging:
 app.use(async (req, res, next) => {
-  console.log("app.use >> req:::", req);
+  // console.log("app.use >> req:::", req);
   // const my = JSON.stringify(req);
 
   const { method, url } = req;
@@ -35,6 +36,12 @@ app.use(async (req, res, next) => {
   next();
 });
 
+// # Middleware for start frontend and backend on one PC (using "cors" package)
+// const corsMiddleware = cors();
+// app.use(corsMiddleware);
+app.use(cors()); // short note
+
+//~ Standard requests
 app.get("/contacts", (req, res) => {
   res.json(contacts);
 });
@@ -42,8 +49,9 @@ app.get("/contacts", (req, res) => {
 app.get("/products", (req, res) => {
   res.json([]);
 });
+//~ END Standard requests
 
-// Middleware for handling missing route
+// # Middleware for handling missing route
 app.use(async (req, res, next) => {
   res.status(404).json({ message: "Not found" });
 });
